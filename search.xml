@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>leetcode 2020.06.28 209. 长度最小的子数组</title>
+      <link href="/2020/06/28/leetcode-2020-06-28-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/"/>
+      <url>/2020/06/28/leetcode-2020-06-28-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<p class='p subtitle'>描述：</p><blockquote class="pullquote"><p>给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组，并返回其长度。如果不存在符合条件的连续子数组，返回 0。</p></blockquote><a id="more"></a><p class='p subtitle'>示例：</p><blockquote class="pullquote"><p>输入: s = 7, nums = [2,3,1,2,4,3]<br>输出: 2<br>解释: 子数组 [4,3] 是该条件下的长度最小的连续子数组。</p></blockquote><!-- <p class='p subtitle'>说明：</p><blockquote class="pullquote"><p>-100.0 &lt; x &lt; 100.0<br>n 是 32 位有符号整数，其数值范围是 [−2^31, 2^31 − 1] 。</p></blockquote> --><p class='p subtitle'>题解：</p><blockquote class="pullquote"><ol><li>解题思路</li></ol><ul><li>连续子数组可以表示为 [i,j]：从第 i 项到第 j 项</li><li>如果窗口的 sum &gt;= s ，如果扩张窗口，条件依然满足，但更背离“最小长度”的要求<ul><li>所以选择收缩窗口，i 右移，直到条件不再满足，所以这里是一个循环</li><li>在循环中，将窗口长度和全局的最小比较</li></ul></li><li>如果窗口不再 sum &gt;= s ，此时应该扩张窗口，直到条件重新满足</li></ul><ol start="2"><li>移动窗口的套路</li></ol><ul><li>扩张窗口：找可行解的过程，找到了就不再扩张</li><li>收缩窗口：在长度上优化该可行解，直到条件被破坏</li><li>然后寻找下一个可行解，然后再优化……</li></ul></blockquote><p class='p subtitle'>代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">s</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> minSubArrayLen = <span class="function"><span class="keyword">function</span>(<span class="params">s, nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="literal">Infinity</span></span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(j&lt;nums.length)&#123;</span><br><span class="line">        sum += nums[j]</span><br><span class="line">        <span class="keyword">while</span>(sum&gt;=s)&#123;</span><br><span class="line">            res = <span class="built_in">Math</span>.min(res, j-i+<span class="number">1</span>)</span><br><span class="line">            sum-=nums[i]</span><br><span class="line">            i++</span><br><span class="line">        &#125;</span><br><span class="line">        j++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res == <span class="literal">Infinity</span> ? <span class="number">0</span> : res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minSubArrayLen</span><span class="params">(self, s: int, nums: List[int])</span> -&gt; int:</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        minValue = float(<span class="string">"inf"</span>)</span><br><span class="line">        dynaSum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> right <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            dynaSum += nums[right]</span><br><span class="line">            <span class="keyword">while</span>(dynaSum&gt;=s):</span><br><span class="line">                minValue = min(minValue, right-left+<span class="number">1</span>)</span><br><span class="line">                dynaSum -= nums[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> minValue <span class="keyword">if</span> minValue != float(<span class="string">"inf"</span>) <span class="keyword">else</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 双指针 </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>leetcode 2020.06.12 739. 每日温度</title>
       <link href="/2020/06/12/leetcode-2020-06-12-739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/"/>
       <url>/2020/06/12/leetcode-2020-06-12-739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/</url>
