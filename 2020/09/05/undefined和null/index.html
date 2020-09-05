@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说">
+<meta name="description" content="undefined和null出现场景总结如下：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么需要node作为中间层">
-<meta property="og:url" content="http://yc-sky.top/2020/09/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81node%E4%BD%9C%E4%B8%BA%E4%B8%AD%E9%97%B4%E5%B1%82/index.html">
+<meta property="og:title" content="undefined和null">
+<meta property="og:url" content="http://yc-sky.top/2020/09/05/undefined%E5%92%8Cnull/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说">
+<meta property="og:description" content="undefined和null出现场景总结如下：">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-01T08:55:09.000Z">
-<meta property="article:modified_time" content="2020-09-05T15:05:00.285Z">
+<meta property="article:published_time" content="2020-09-04T18:49:41.000Z">
+<meta property="article:modified_time" content="2020-09-05T15:18:00.076Z">
 <meta property="article:author" content="yczhang">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/01/为什么需要node作为中间层/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/05/undefined和null/"/>
 
 
 
 
 
-  <title>为什么需要node作为中间层 | Yc的博客</title>
+  <title>undefined和null | Yc的博客</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81node%E4%BD%9C%E4%B8%BA%E4%B8%AD%E9%97%B4%E5%B1%82/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/05/undefined%E5%92%8Cnull/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -294,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">为什么需要node作为中间层</h1>
+          <h1 class="post-title" itemprop="name headline">undefined和null</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-01T16:55:09+08:00">
-                2020-09-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-05T02:49:41+08:00">
+                2020-09-05
               </time>
             
 
@@ -366,19 +366,25 @@
       
 
       
-        <p>通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。<br>以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说，这样做有什么意义呢？</p>
+        <p>undefined和null出现场景总结如下：</p>
 <a id="more"></a>
 <ul>
-<li>用Node的原因有以下：<ul>
-<li>代理：在开发环境下，我们可以利用代理来，解决最常见的跨域问题；在线上环境下，我们可以利用代理，转发请求到多个服务端</li>
-<li>缓存：缓存其实是更靠近前端的需求，用户的动作触发数据的更新，node中间层可以直接处理一部分缓存需求。</li>
-<li>限流：node中间层，可以针对接口或者路由做响应的限流。</li>
-<li>日志：相比其他服务端语言，node中间层的日志记录，能更方便快捷的定位问题（是在浏览器端还是服务端）。</li>
-<li>监控：擅长高并发的请求处理，做监控也是合适的选项。</li>
-<li>鉴权：有一个中间层去鉴权，也是一种单一职责的实现。</li>
-<li>路由：前端更需要掌握页面路由的权限和逻辑。</li>
-<li>服务端渲染：node中间层的解决方案更灵活，比如SSR、模板直出、利用一些JS库做预渲染等等。</li>
-<li>更多的可能性</li>
+<li><strong>undefined</strong><ul>
+<li>变量提升：只声明，未定义，其默认值为undefined</li>
+<li>严格模式下，没有明确的执行主体，this的值为undefined</li>
+<li>对象没有这个属性名，属性值为undefined</li>
+<li>对象没有这个属性名，typeof obj[item]值为字符串’undefined’</li>
+<li>函数定义形参不传值，默认值为undefined</li>
+<li>函数没有返回值（没有return语句或者return;）</li>
+<li>…</li>
+</ul>
+</li>
+<li><strong>null</strong><ul>
+<li>手动设置变量的值或者对象某一属性的值为null（后面再赋值）</li>
+<li>在JS的DOM元素获取中，如果没有获取到指定的元素对象，结果一般为null</li>
+<li>Object.prototype._proto_的值为null</li>
+<li>正则捕获的时候，如果没有捕获到结果，默认值是null</li>
+<li>…</li>
 </ul>
 </li>
 </ul>
@@ -412,8 +418,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/07/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2020/09/05/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/" rel="next" title="如何实现数组去重">
+                <i class="fa fa-chevron-left"></i> 如何实现数组去重
               </a>
             
           </div>
@@ -422,8 +428,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/01/%E9%9D%A2%E7%BB%8F-yz/" rel="prev" title="面经(yz)">
-                面经(yz) <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/05/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/" rel="prev" title="回流和重绘">
+                回流和重绘 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

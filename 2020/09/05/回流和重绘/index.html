@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说">
+<meta name="description" content="网页的回流和重绘知识点如下：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么需要node作为中间层">
-<meta property="og:url" content="http://yc-sky.top/2020/09/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81node%E4%BD%9C%E4%B8%BA%E4%B8%AD%E9%97%B4%E5%B1%82/index.html">
+<meta property="og:title" content="回流和重绘">
+<meta property="og:url" content="http://yc-sky.top/2020/09/05/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说">
+<meta property="og:description" content="网页的回流和重绘知识点如下：">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-01T08:55:09.000Z">
-<meta property="article:modified_time" content="2020-09-05T15:05:00.285Z">
+<meta property="article:published_time" content="2020-09-05T15:03:53.000Z">
+<meta property="article:modified_time" content="2020-09-05T15:16:30.112Z">
 <meta property="article:author" content="yczhang">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/01/为什么需要node作为中间层/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/05/回流和重绘/"/>
 
 
 
 
 
-  <title>为什么需要node作为中间层 | Yc的博客</title>
+  <title>回流和重绘 | Yc的博客</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/01/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81node%E4%BD%9C%E4%B8%BA%E4%B8%AD%E9%97%B4%E5%B1%82/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/05/%E5%9B%9E%E6%B5%81%E5%92%8C%E9%87%8D%E7%BB%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -294,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">为什么需要node作为中间层</h1>
+          <h1 class="post-title" itemprop="name headline">回流和重绘</h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-01T16:55:09+08:00">
-                2020-09-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-05T23:03:53+08:00">
+                2020-09-05
               </time>
             
 
@@ -329,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
                   </a>
                 </span>
 
@@ -366,22 +366,31 @@
       
 
       
-        <p>通常我们把Web领域分为客户端和服务端，也就是前端和后端，这里的后端就包含了网关，静态资源，接口，缓存，数据库等。而中间层呢，就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等。<br>以SSR来说，在服务端将页面渲染好，可以加快用户的首屏加载速度，避免请求时白屏，还有利于网站做SEO，他的好处是比较好理解的。那么对于数据的聚合，接口转发来说，这样做有什么意义呢？</p>
+        <p>网页的回流和重绘知识点如下：</p>
 <a id="more"></a>
-<ul>
-<li>用Node的原因有以下：<ul>
-<li>代理：在开发环境下，我们可以利用代理来，解决最常见的跨域问题；在线上环境下，我们可以利用代理，转发请求到多个服务端</li>
-<li>缓存：缓存其实是更靠近前端的需求，用户的动作触发数据的更新，node中间层可以直接处理一部分缓存需求。</li>
-<li>限流：node中间层，可以针对接口或者路由做响应的限流。</li>
-<li>日志：相比其他服务端语言，node中间层的日志记录，能更方便快捷的定位问题（是在浏览器端还是服务端）。</li>
-<li>监控：擅长高并发的请求处理，做监控也是合适的选项。</li>
-<li>鉴权：有一个中间层去鉴权，也是一种单一职责的实现。</li>
-<li>路由：前端更需要掌握页面路由的权限和逻辑。</li>
-<li>服务端渲染：node中间层的解决方案更灵活，比如SSR、模板直出、利用一些JS库做预渲染等等。</li>
-<li>更多的可能性</li>
+<ol>
+<li><strong>回流</strong><br>回流又称之为<strong>重排</strong>，当Render Tree中的一部分（或者全部）因元素的规模，尺寸，布局等改变，而需要重新构建页面，就会触发回流<br>具体总结为：<ul>
+<li>页面初始渲染</li>
+<li>添加、删除可见的DOM元素</li>
+<li>改变元素位置，尺寸，内容<br>触发回流的属性：</li>
+<li>盒子模型相关属性：width、height、display、border、border-width…</li>
+<li>定位及浮动：position、left、right、top、bottom、float、padding、margin…</li>
+<li>文字相关：text-align、overflow、font-weight、font-family、line-height，vertical-align、font-size、white-space…</li>
 </ul>
 </li>
+<li><strong>重绘</strong><br>当Render Tree中的一些元素需要更新属性，而这些属性只是影响到元素的外观，风格而不影响布局，就会触发重绘<br><strong>回流一定重绘，但是重绘不一定回流</strong><br>触发重绘的属性：<ul>
+<li>color、border-style、border-radius、outline、visibility、background-color、text-decoration、background、background-image、box-shadow…</li>
 </ul>
+</li>
+<li>如何减少回流和重绘<ul>
+<li>用translate代替top</li>
+<li>用opacity代替visibility</li>
+<li>预先定义好className，然后统一修改Dom的className</li>
+<li>不要把Dom结点的属性值放在一个循环里面变成循环变量</li>
+<li>让要操作的元素进行“离线处理”，处理完后一起更新</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -412,8 +421,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/07/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2020/09/05/undefined%E5%92%8Cnull/" rel="next" title="undefined和null">
+                <i class="fa fa-chevron-left"></i> undefined和null
               </a>
             
           </div>
@@ -421,10 +430,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/01/%E9%9D%A2%E7%BB%8F-yz/" rel="prev" title="面经(yz)">
-                面经(yz) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
