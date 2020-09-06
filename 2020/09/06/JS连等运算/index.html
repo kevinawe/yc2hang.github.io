@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="实现数组去重有多种方式实现，具体可见如下代码：">
+<meta name="description" content="js连等运算知识点考查">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何实现数组去重">
-<meta property="og:url" content="http://yc-sky.top/2020/09/05/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/index.html">
+<meta property="og:title" content="JS连等运算">
+<meta property="og:url" content="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="实现数组去重有多种方式实现，具体可见如下代码：">
-<meta property="article:published_time" content="2020-09-04T18:12:58.000Z">
-<meta property="article:modified_time" content="2020-09-05T15:17:43.232Z">
+<meta property="og:description" content="js连等运算知识点考查">
+<meta property="article:published_time" content="2020-09-06T08:29:39.000Z">
+<meta property="article:modified_time" content="2020-09-06T08:47:53.128Z">
 <meta property="article:author" content="yczhang">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/05/如何实现数组去重/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/06/JS连等运算/"/>
 
 
 
 
 
-  <title>如何实现数组去重 | Yc的博客</title>
+  <title>JS连等运算 | Yc的博客</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/05/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何实现数组去重</h1>
+          <h1 class="post-title" itemprop="name headline">JS连等运算</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-05T02:12:58+08:00">
-                2020-09-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T16:29:39+08:00">
+                2020-09-06
               </time>
             
 
@@ -365,14 +365,20 @@
       
 
       
-        <p>实现数组去重有多种方式实现，具体可见如下代码：</p>
+        <p>js连等运算知识点考查</p>
 <a id="more"></a>
-<ol>
-<li>循环迭代+map<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">~(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> pro = <span class="built_in">Array</span>.prototype</span><br><span class="line">    pro.myDistinct = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.length;i++)&#123;</span><br><span class="line">            <span class="keyword">let</span> item = <span class="keyword">this</span>[i]</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[item] !== <span class="string">'undefined'</span>)&#123; <span class="comment">// 括号中也可写做 obj[item] !== undefined</span></span><br><span class="line">                <span class="keyword">this</span>[i] = <span class="keyword">this</span>[<span class="keyword">this</span>.length<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">this</span>.length--</span><br><span class="line">                i--</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line">            obj[item] = item</span><br><span class="line">        &#125;</span><br><span class="line">        obj = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
-<li>ES6的Array.filter()<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> pro = <span class="built_in">Array</span>.prototype</span><br><span class="line">    pro.myDistinct = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.indexOf(item) === index</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
-<li>ES6的Set()（高性能）<br>set结构成员的值都是唯一的，可以接受数组作为参数<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">~(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> pro = <span class="built_in">Array</span>.prototype</span><br><span class="line">    pro.myDistinct = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> <span class="keyword">set</span> = new Set(this)</span><br><span class="line">        return [...<span class="keyword">set</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出以下代码的结果并解释为什么</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">n</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">var</span> b = a</span><br><span class="line">a.x = a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125; <span class="comment">// a = &#123; n: 2 &#125; =&gt; &#123; n: 2 &#125;.x = a</span></span><br><span class="line"><span class="built_in">console</span>.log(a.x) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b.x) <span class="comment">// &#123; n: 2 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>解释：这里的重点是a.x到底是谁<br>简单来说，在赋值过程开始时，a其实是{n:1}<br>a.x=a={n:2}<br>其实在计算机眼中是长成这样的：<br>{n:1}.x=a={n:2}<br>所以，这个赋值发生了两件事<br>//1.把”a”变成了{n:2}<br>//2.把{n:1}的x变成了{n:2}——————–<br>也就是说：<br>a.x = a = {n: 2};<br>其实被计算机执行成了<br>{n:1}.x={n: 2};<br>a={n: 2};<br>所以最后的结果变成了<br>a=={n: 2};<br>console.log(a.x) =&gt; undefined    //因为a没有x属性<br>b=={n: 1, x: {n: 2}}<br>console.log(b.x) =&gt; {n: 2}</p>
 </li>
-</ol>
+<li><p>连等开始之前，程序会把所有引用都保存起来</p>
+</li>
+<li><p>连等的过程中，这些值是不变的</p>
+</li>
+<li><p>等到整个连等结束了，再一起变</p>
+</li>
+</ul>
 
       
     </div>
@@ -403,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/05/%E5%A4%9A%E4%B8%AA%E6%8C%89%E9%92%AE%E5%8D%95%E5%87%BB%E4%BA%8B%E4%BB%B6/" rel="next" title="多个按钮单击事件">
-                <i class="fa fa-chevron-left"></i> 多个按钮单击事件
+              <a href="/2020/09/06/%E8%B7%A8%E5%9F%9F%E5%B8%B8%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="next" title="跨域常用解决方案">
+                <i class="fa fa-chevron-left"></i> 跨域常用解决方案
               </a>
             
           </div>
@@ -412,10 +418,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/05/undefined%E5%92%8Cnull/" rel="prev" title="undefined和null">
-                undefined和null <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
