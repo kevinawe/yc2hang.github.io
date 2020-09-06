@@ -196,7 +196,6 @@
 <li><a href="https://www.cnblogs.com/soldierback/p/11714052.html" target="_blank" rel="noopener">此链接内容可供参考</a></li>
 </ul>
 </li>
-<li>首页一个sleep函数（可从Promise，Generator，async/await等角度实现）<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">        setTimeout(resolve, ms)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">~<span class="function">(<span class="params"><span class="keyword">async</span> (</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">111</span>)</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">222</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
 </ol>
 ]]></content>
       <tags>
@@ -504,6 +503,50 @@
 <li><p>等到整个连等结束了，再一起变</p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>面试题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树的层次遍历</title>
+    <url>/2020/09/06/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</url>
+    <content><![CDATA[<p>给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。</p>
+<a id="more"></a>
+<blockquote>
+<p>原题描述访问：<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/binary-tree-level-order-traversal/</a></p>
+</blockquote>
+<h3 id="bfs："><a href="#bfs：" class="headerlink" title="bfs："></a>bfs：</h3><p>首先定义一个存储结果的数组，将二叉树的每一层分级lv，遍历每个跟节点，将节点的值存入数组，遍历一层lv+1，递归左右子节点将值存入同级数组中，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> levelOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root || root.length === <span class="number">0</span>) <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">let</span> res = []</span><br><span class="line">    <span class="keyword">let</span> bfs = <span class="function">(<span class="params">curr, lv</span>) =&gt;</span> &#123;</span><br><span class="line">        !res[lv] &amp;&amp; (res[lv] = [])</span><br><span class="line">        <span class="keyword">if</span>(curr)&#123;</span><br><span class="line">            res[lv].push(curr.val)</span><br><span class="line">            <span class="keyword">if</span>(curr.left) bfs(curr.left, lv+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span>(curr.right) bfs(curr.right, lv+<span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    bfs(root, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="队列："><a href="#队列：" class="headerlink" title="队列："></a>队列：</h3><p>将初始二叉树存入quene中，通过双层while循环存入每层级的值</p>
+<ul>
+<li>外层while循环的是二叉树每层的数量</li>
+<li>内层while目的是将每层的每项存入各层数组中</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> levelOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!root || root.length === <span class="number">0</span>) <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">var</span> result = []</span><br><span class="line">    <span class="keyword">var</span> quene = [root]</span><br><span class="line">    <span class="keyword">while</span>(quene.length)&#123;</span><br><span class="line">        <span class="keyword">var</span> len = quene.length</span><br><span class="line">        <span class="keyword">var</span> layer = []</span><br><span class="line">        <span class="keyword">while</span>(len)&#123;</span><br><span class="line">            <span class="keyword">var</span> node = quene.shift()</span><br><span class="line">            layer.push(node.val)</span><br><span class="line">            <span class="keyword">if</span>(node.left)&#123;</span><br><span class="line">                quene.push(node.left)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(node.right)&#123;</span><br><span class="line">                quene.push(node.right)</span><br><span class="line">            &#125;</span><br><span class="line">            len--</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(layer)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+        <tag>队列</tag>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常见面试题</title>
+    <url>/2020/09/06/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<p>常见面试编程题汇总</p>
+<a id="more"></a>
+<ol>
+<li>手写一个sleep函数（可从Promise，Generator，async/await等角度实现）<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">        setTimeout(resolve, ms)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">~<span class="function">(<span class="params"><span class="keyword">async</span> (</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">111</span>)</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">222</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
+<li>已知如下数组，编写一个程序将数组扁平化去除其中重复部分数据，最终得到一个升序且不重复的数组(不使用es6的flat()方法)<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, [<span class="number">11</span>, <span class="number">12</span>, [<span class="number">12</span>, <span class="number">13</span>, [<span class="number">14</span>]]]], <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res = []</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> arr[i] == <span class="string">'number'</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(res.indexOf(arr[i]) == <span class="number">-1</span>)&#123;</span><br><span class="line">                res.push(arr[i])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flat(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> pivot = res[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">let</span> left = [],right = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;res.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(res[i]&gt;pivot)&#123;</span><br><span class="line">            right.push(res[i])</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res[i]&lt;pivot)&#123;</span><br><span class="line">            left.push(res[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(left.concat(pivot, right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">flat(arr)</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
         <category>JavaScript</category>
