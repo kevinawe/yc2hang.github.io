@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="js连等运算知识点考查">
+<meta name="description" content="网上很多js机制相关的讲解，本篇只列出相关题目以便以后复习巩固">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS连等运算">
-<meta property="og:url" content="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:title" content="JS的执行机制">
+<meta property="og:url" content="http://yc-sky.top/2020/09/07/JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="js连等运算知识点考查">
-<meta property="article:published_time" content="2020-09-06T08:29:39.000Z">
-<meta property="article:modified_time" content="2020-09-06T08:47:53.128Z">
+<meta property="og:description" content="网上很多js机制相关的讲解，本篇只列出相关题目以便以后复习巩固">
+<meta property="article:published_time" content="2020-09-07T13:58:46.000Z">
+<meta property="article:modified_time" content="2020-09-07T14:09:35.670Z">
 <meta property="article:author" content="yczhang">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/06/JS连等运算/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/07/JS的执行机制/"/>
 
 
 
 
 
-  <title>JS连等运算 | Yc的博客</title>
+  <title>JS的执行机制 | Yc的博客</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/07/JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JS连等运算</h1>
+          <h1 class="post-title" itemprop="name headline">JS的执行机制</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T16:29:39+08:00">
-                2020-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-07T21:58:46+08:00">
+                2020-09-07
               </time>
             
 
@@ -365,20 +365,22 @@
       
 
       
-        <p>js连等运算知识点考查</p>
+        <p>网上很多js机制相关的讲解，本篇只列出相关题目以便以后复习巩固</p>
 <a id="more"></a>
-<ul>
-<li><p>输出以下代码的结果并解释为什么</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">n</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">var</span> b = a</span><br><span class="line">a.x = a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125; <span class="comment">// a = &#123; n: 2 &#125; =&gt; &#123; n: 2 &#125;.x = a</span></span><br><span class="line"><span class="built_in">console</span>.log(a.x) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b.x) <span class="comment">// &#123; n: 2 &#125;</span></span><br></pre></td></tr></table></figure>
-<p>解释：这里的重点是a.x到底是谁<br>简单来说，在赋值过程开始时，a其实是{n:1}<br>a.x=a={n:2}<br>其实在计算机眼中是长成这样的：<br>{n:1}.x=a={n:2}<br>所以，这个赋值发生了两件事<br>//1.把”a”变成了{n:2}<br>//2.把{n:1}的x变成了{n:2}——————–<br>也就是说：<br>a.x = a = {n: 2};<br>其实被计算机执行成了<br>{n:1}.x={n: 2};<br>a={n: 2};<br>所以最后的结果变成了<br>a=={n: 2};<br>console.log(a.x) =&gt; undefined    //因为a没有x属性<br>b=={n: 1, x: {n: 2}}<br>console.log(b.x) =&gt; {n: 2}</p>
-</li>
-<li><p>连等开始之前，程序会把所有引用都保存起来</p>
-</li>
-<li><p>连等的过程中，这些值是不变的</p>
-</li>
-<li><p>等到整个连等结束了，再一起变</p>
-</li>
+<div class="note "><p>js执行机制相关讲解可参考以下博客<br><a href="https://juejin.im/post/6855129007558492174" target="_blank" rel="noopener">https://juejin.im/post/6855129007558492174</a><br><a href="https://juejin.im/post/6844903568814800904" target="_blank" rel="noopener">https://juejin.im/post/6844903568814800904</a></p></div>
+<h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>任务队列就是一个事件队列,我们前面提到的有些耗时的任务或一些异步任务,我们将它放到任务队列中.当满足某些条件时就可以从任务队列中取出去放到主线程中执行. 我们先来看下面的代码,类似的问题是有可能出现在一些面试题中的.问的就是打印出来的顺序是多少?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2 3 4 1</span></span><br></pre></td></tr></table></figure>
+<p>为什么是 2341 的顺序呢?我们来分析下,JS中代码的执行是从上到下一行一行执行的.首先执行的是 setTimeout 这段代码,发现这是定时器任务,于是便把内部的具体执行内容 console.log(1) 先拿出来放到其他地方,准备待会儿再执行.继续执行到 console.log(2) 这句,于是先输出一个2.继续执行,遇到了一个 Promise .注意在这个 Promise中 , console.log(3) 以及之后的 resolve() 这两句都是同步执行的,但是 then 里面的代码却是异步执行的.于是在输出了一个3之后,又把 console.log(4) 拿出来放到其他地方,准备晚点再去执行它.好了,现在我们已经把 console.log(1) 和 console.log(4) 扔进了一个地方,那么为什么是先输出4然后再是1呢?这是因为虽然1和4都被我们扔进了一个地方,我们可以把这个地方理解为一个大房子.1和4被扔进了不同的房间.其中1被扔进了一个叫做 宏任务队列 的房间.4被扔进了另一个叫做 微任务队列 的房间.</p>
+<p><strong>总结起来就是:</strong>不同类型的任务会进入到对应的事件队列(Event Queue)中.每次执行下一个宏任务之前先去微任务队列里面查看,直到把微任务队列清空后再去执行宏任务队列中的任务.</p>
+<h3 id="微任务和宏任务"><a href="#微任务和宏任务" class="headerlink" title="微任务和宏任务"></a>微任务和宏任务</h3><ul>
+<li><strong>微任务(micro-task)</strong>: Promise ,process.nextTick 等</li>
+<li><strong>宏任务(macro-task)</strong>: script, setTimeout, setInterval 等</li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line"><span class="comment">// 2 1 3</span></span><br></pre></td></tr></table></figure>
+<p>可以看到输出的结果为 2 1 3 ,这就是因为 setTimeout 是个宏任务, 而 nextTick 则是个微任务.所以先清空微任务队列,即先执行 process.nextTick 的回调.</p>
+<h3 id="运用微任务和宏任务来解题"><a href="#运用微任务和宏任务来解题" class="headerlink" title="运用微任务和宏任务来解题"></a>运用微任务和宏任务来解题</h3><p>到这里我们已经介绍了同步异步以及微任务队列和宏任务队列的相关内容了,我们再来看一看一道复杂一点的题目.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">    resolve()</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">5</span>)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">6</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">7</span>)</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="number">8</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">9</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 4 5 7 6 9 1 2 3 8</span></span><br></pre></td></tr></table></figure>
+<p>首先执行前面两个 setTimeout ,于是把123放到了宏任务队列中.执行到4的时候,先打印出一个4.然后是两个Promise,先打印出5,然后把6放到了微任务队列中.再之后打印出7,把8放到宏任务中,然后就是9放到微任务中.此时已经打印出457,并且微任务中有[6,9],宏任务中有[1,2,3,8].代码第一遍已经执行完毕,前面提到了整个script 脚本相当于一个宏任务.于是便去执行微任务,接着打印出69.此时微任务已经清空,去执行宏任务.选取宏任务队列中的第一个任务,打印出1之后.回过头去看看微任务队列是否还有未执行的任务,现在已经没有了.于是便继续执行宏任务队列中的下一个任务即2.打印出2之后,因为这是一个 Promise ,所以将then里面的3放到微任务队列,此次宏任务执行完毕.此时的微任务队列有[3],宏任务队列有[8].再去执行微任务队列,打印出3.最后再次执行宏任务队列,打印出8.</p>
 
       
     </div>
@@ -409,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/06/%E8%B7%A8%E5%9F%9F%E5%B8%B8%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="next" title="跨域常用解决方案">
-                <i class="fa fa-chevron-left"></i> 跨域常用解决方案
+              <a href="/2020/09/07/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="next" title="排序算法">
+                <i class="fa fa-chevron-left"></i> 排序算法
               </a>
             
           </div>
@@ -419,8 +421,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/06/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="常见面试题">
-                常见面试题 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/07/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" rel="prev" title="防抖和节流">
+                防抖和节流 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -473,8 +475,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -554,6 +565,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#任务队列"><span class="nav-number">1.</span> <span class="nav-text">任务队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微任务和宏任务"><span class="nav-number">2.</span> <span class="nav-text">微任务和宏任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运用微任务和宏任务来解题"><span class="nav-number">3.</span> <span class="nav-text">运用微任务和宏任务来解题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

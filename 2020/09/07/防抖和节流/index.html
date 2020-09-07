@@ -79,14 +79,14 @@
 
 
 
-<meta name="description" content="js连等运算知识点考查">
+<meta name="description" content="前端开发中，我们的一些事件的响应比较慢或者需要请求接口完成的，我们不希望这些事件频繁执行，比如说需要对input输入的数据保存，监听keyup事件，如果每次键盘输入就执行保存请求，那样可能会产生很多频繁的请求，针对这种连续触发的高频率事件，函数防抖和函数节流给出了两种解决方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS连等运算">
-<meta property="og:url" content="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:title" content="防抖和节流">
+<meta property="og:url" content="http://yc-sky.top/2020/09/07/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="js连等运算知识点考查">
-<meta property="article:published_time" content="2020-09-06T08:29:39.000Z">
-<meta property="article:modified_time" content="2020-09-06T08:47:53.128Z">
+<meta property="og:description" content="前端开发中，我们的一些事件的响应比较慢或者需要请求接口完成的，我们不希望这些事件频繁执行，比如说需要对input输入的数据保存，监听keyup事件，如果每次键盘输入就执行保存请求，那样可能会产生很多频繁的请求，针对这种连续触发的高频率事件，函数防抖和函数节流给出了两种解决方法">
+<meta property="article:published_time" content="2020-09-07T15:44:55.000Z">
+<meta property="article:modified_time" content="2020-09-07T16:13:14.264Z">
 <meta property="article:author" content="yczhang">
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/06/JS连等运算/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/07/防抖和节流/"/>
 
 
 
 
 
-  <title>JS连等运算 | Yc的博客</title>
+  <title>防抖和节流 | Yc的博客</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/06/JS%E8%BF%9E%E7%AD%89%E8%BF%90%E7%AE%97/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/07/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JS连等运算</h1>
+          <h1 class="post-title" itemprop="name headline">防抖和节流</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T16:29:39+08:00">
-                2020-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-07T23:44:55+08:00">
+                2020-09-07
               </time>
             
 
@@ -365,21 +365,25 @@
       
 
       
-        <p>js连等运算知识点考查</p>
+        <p>前端开发中，我们的一些事件的响应比较慢或者需要请求接口完成的，我们不希望这些事件频繁执行，比如说需要对input输入的数据保存，监听keyup事件，如果每次键盘输入就执行保存请求，那样可能会产生很多频繁的请求，针对这种连续触发的高频率事件，函数防抖和函数节流给出了两种解决方法</p>
 <a id="more"></a>
-<ul>
-<li><p>输出以下代码的结果并解释为什么</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">n</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">var</span> b = a</span><br><span class="line">a.x = a = &#123; <span class="attr">n</span>: <span class="number">2</span> &#125; <span class="comment">// a = &#123; n: 2 &#125; =&gt; &#123; n: 2 &#125;.x = a</span></span><br><span class="line"><span class="built_in">console</span>.log(a.x) <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(b.x) <span class="comment">// &#123; n: 2 &#125;</span></span><br></pre></td></tr></table></figure>
-<p>解释：这里的重点是a.x到底是谁<br>简单来说，在赋值过程开始时，a其实是{n:1}<br>a.x=a={n:2}<br>其实在计算机眼中是长成这样的：<br>{n:1}.x=a={n:2}<br>所以，这个赋值发生了两件事<br>//1.把”a”变成了{n:2}<br>//2.把{n:1}的x变成了{n:2}——————–<br>也就是说：<br>a.x = a = {n: 2};<br>其实被计算机执行成了<br>{n:1}.x={n: 2};<br>a={n: 2};<br>所以最后的结果变成了<br>a=={n: 2};<br>console.log(a.x) =&gt; undefined    //因为a没有x属性<br>b=={n: 1, x: {n: 2}}<br>console.log(b.x) =&gt; {n: 2}</p>
-</li>
-<li><p>连等开始之前，程序会把所有引用都保存起来</p>
-</li>
-<li><p>连等的过程中，这些值是不变的</p>
-</li>
-<li><p>等到整个连等结束了，再一起变</p>
-</li>
-</ul>
+<h3 id="防抖-debounce"><a href="#防抖-debounce" class="headerlink" title="防抖(debounce)"></a>防抖(debounce)</h3><div class="note "><p>去抖动，方法是在函数触发时，设定一个周期延迟执行函数，若在周期内函数再次执行、则刷新延迟时间，直到最后执行函数，这里函数收集到的结果是最后一次操作的结果</p></div>
 
+<h5 id="简单的实现"><a href="#简单的实现" class="headerlink" title="简单的实现"></a>简单的实现</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer; <span class="comment">// 定时器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">        timer = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">"#test"</span>).addEventListener(<span class="string">'keyup'</span>, change);</span><br></pre></td></tr></table></figure>
+<p>这里监听input的keyup事件，change方法执行的时候会首先判断定时器是否存在、如果存在则clear掉，如果不则新建一个定时器延迟1s执行</p>
+<h5 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h5><p>上面这样实现没毛病，但是却有一个问题，没有复用性,现在我来把他封装成一个公共的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">keyup</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.target.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span> (<span class="params">method, delay</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        timer &amp;&amp; clearTimeout(timer);</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            method.apply(self, args)</span><br><span class="line">            timer = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">"#test"</span>).addEventListener(<span class="string">'keyup'</span>, debounce(keyup, <span class="number">1000</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="节流-throttling"><a href="#节流-throttling" class="headerlink" title="节流(throttling)"></a>节流(throttling)</h3><div class="note "><p>节流的概念是设定一个周期，周期内只执行一次，若有新的事件触发则不执行，周期结束后又有新的事件触发开始新的周期</p></div>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>比如说我们监听onscroll判断获取当前的scrollTop、可以用到节流</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start, timer, wait = <span class="number">200</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">    <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">        <span class="comment">//第一次触发，设置start时间</span></span><br><span class="line">        start = <span class="built_in">Date</span>.now()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 当前时间减去开始时间大于等于设定的周期则执行并且初始化start、timer</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Date</span>.now() - start &gt;= wait) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'触发了'</span>)</span><br><span class="line">        start = timer = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        timer &amp;&amp; clearTimeout(timer)</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            scroll.apply(self, <span class="built_in">arguments</span>)</span><br><span class="line">        &#125;,wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'scroll'</span>, scroll)</span><br></pre></td></tr></table></figure>
+<h5 id="封装-1"><a href="#封装-1" class="headerlink" title="封装"></a>封装</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttling</span> (<span class="params">method, wait</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start, timer</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">            start = <span class="built_in">Date</span>.now();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">Date</span>.now() - start &gt;= wait) &#123;</span><br><span class="line">            method.apply(self, args)</span><br><span class="line">            start = timer = <span class="keyword">void</span> <span class="number">0</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer &amp;&amp; clearTimeout(timer)</span><br><span class="line">            timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                run.apply(self, args)</span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'触发了'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'scroll'</span>, throttling(scroll, <span class="number">200</span>))</span><br></pre></td></tr></table></figure>
+
+<div class="note "><ul>
+<li>防抖和节流，通俗来说就是，函数防抖的时候,每次调用事件都是在正常执行暂停后一段时间(等你歇菜了我再上) 函数节流的时候,则是每隔一定的时间间隔就触发一次(管你频率那么快,我就保持自己的节奏) </li>
+<li>防抖：在设定时间间隔内，再次触发事件时，定时器会清除，函数重新执行</li>
+<li>节流：在设定时间间隔内，再次触发事件时，判断定时器是否为null，若为null，则执行函数。否则不执行</li>
+</ul></div>
       
     </div>
     
@@ -409,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/06/%E8%B7%A8%E5%9F%9F%E5%B8%B8%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="next" title="跨域常用解决方案">
-                <i class="fa fa-chevron-left"></i> 跨域常用解决方案
+              <a href="/2020/09/07/JS%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/" rel="next" title="JS的执行机制">
+                <i class="fa fa-chevron-left"></i> JS的执行机制
               </a>
             
           </div>
@@ -418,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/06/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="prev" title="常见面试题">
-                常见面试题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -473,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -554,6 +563,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#防抖-debounce"><span class="nav-number">1.</span> <span class="nav-text">防抖(debounce)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单的实现"><span class="nav-number">1.0.1.</span> <span class="nav-text">简单的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#封装"><span class="nav-number">1.0.2.</span> <span class="nav-text">封装</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节流-throttling"><span class="nav-number">2.</span> <span class="nav-text">节流(throttling)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实现"><span class="nav-number">2.0.1.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#封装-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">封装</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
