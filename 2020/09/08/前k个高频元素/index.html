@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="面试题," />
+  <meta name="keywords" content="Map,小顶堆,桶排序,leetcode," />
 
 
 
@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="以下为虾皮一面部分面试题:">
+<meta name="description" content="给定一个非空的整数数组，返回其中出现频率前 k 高的元素。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面经(虾皮)">
-<meta property="og:url" content="http://yc-sky.top/2020/09/04/%E9%9D%A2%E7%BB%8F-%E8%99%BE%E7%9A%AE/index.html">
+<meta property="og:title" content="前k个高频元素">
+<meta property="og:url" content="http://yc-sky.top/2020/09/08/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/index.html">
 <meta property="og:site_name" content="Yc的博客">
-<meta property="og:description" content="以下为虾皮一面部分面试题:">
-<meta property="article:published_time" content="2020-09-04T10:42:32.000Z">
-<meta property="article:modified_time" content="2020-09-04T10:47:54.244Z">
+<meta property="og:description" content="给定一个非空的整数数组，返回其中出现频率前 k 高的元素。">
+<meta property="article:published_time" content="2020-09-08T14:10:18.000Z">
+<meta property="article:modified_time" content="2020-09-08T14:19:17.671Z">
 <meta property="article:author" content="yczhang">
-<meta property="article:tag" content="面试题">
+<meta property="article:tag" content="Map">
+<meta property="article:tag" content="小顶堆">
+<meta property="article:tag" content="桶排序">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yc-sky.top/2020/09/04/面经-虾皮/"/>
+  <link rel="canonical" href="http://yc-sky.top/2020/09/08/前k个高频元素/"/>
 
 
 
 
 
-  <title>面经(虾皮) | Yc的博客</title>
+  <title>前k个高频元素 | Yc的博客</title>
   
 
 
@@ -276,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/04/%E9%9D%A2%E7%BB%8F-%E8%99%BE%E7%9A%AE/">
+    <link itemprop="mainEntityOfPage" href="http://yc-sky.top/2020/09/08/%E5%89%8Dk%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yczhang">
@@ -293,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">面经(虾皮)</h1>
+          <h1 class="post-title" itemprop="name headline">前k个高频元素</h1>
         
 
         <div class="post-meta">
@@ -305,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-04T18:42:32+08:00">
-                2020-09-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-08T22:10:18+08:00">
+                2020-09-08
               </time>
             
 
@@ -328,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
                   </a>
                 </span>
 
@@ -365,14 +368,39 @@
       
 
       
-        <p>以下为虾皮一面部分面试题:</p>
+        <p>给定一个非空的整数数组，返回其中出现频率前 k 高的元素。</p>
 <a id="more"></a>
-<ol>
-<li>输出以下结果<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = <span class="string">'Parent'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Tom</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = <span class="string">'Tom'</span></span><br><span class="line">&#125;</span><br><span class="line">Parent.__proto__.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// Parent.__proto__实际上指向Object.prototype</span></span><br><span class="line">    <span class="keyword">this</span>.a = <span class="number">4</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line">Parent.print() <span class="comment">// 4</span></span><br><span class="line">Tom.print() <span class="comment">// 4</span></span><br><span class="line"><span class="keyword">var</span> child = <span class="keyword">new</span> Parent()</span><br><span class="line"><span class="built_in">console</span>.log(child.a) <span class="comment">// Parent</span></span><br><span class="line">child.print() <span class="comment">// 报错 child.print is not a function</span></span><br></pre></td></tr></table></figure></li>
-<li>f能不能拿到a方法和b方法？<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.prototype.a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Function</span>.prototype.b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="comment">// f最终指向为Object的prototype，所有只能拿到a方法</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
+<blockquote>
+<p>原题描述访问：<a href="https://leetcode-cn.com/problems/top-k-frequent-elements/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/top-k-frequent-elements/</a></p>
+</blockquote>
+<h3 id="map-数组"><a href="#map-数组" class="headerlink" title="map+数组"></a>map+数组</h3><p>利用 map 记录每个元素出现的频率，利用数组来比较排序元素<br><strong>代码实现</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> topKFrequent = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(), arr = [...new <span class="built_in">Set</span>(nums)]</span><br><span class="line">    nums.map(<span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(num)) map.set(num, map.get(num)+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span> map.set(num, <span class="number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> map.get(b) - map.get(a)).slice(<span class="number">0</span>, k);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：O(nlogn)</li>
+<li>空间复杂度：O(n)<br>题目要求算法的时间复杂度必须优于 O(n log n) ，所以这种实现不合题目要求</li>
+</ul>
+<h3 id="map-小顶堆"><a href="#map-小顶堆" class="headerlink" title="map+小顶堆"></a>map+小顶堆</h3><p>遍历一遍数组统计每个元素的频率，并将元素值（ key ）与出现的频率（ value ）保存到 map 中<br>通过 map 数据构建一个前 k 个高频元素小顶堆，小顶堆上的任意节点值都必须小于等于其左右子节点值，即堆顶是最小值。<br>具体步骤如下：<br>    - 遍历数据，统计每个元素的频率，并将元素值（ key ）与出现的频率（ value ）保存到 map 中<br>    - 遍历 map ，将前 k 个数，构造一个小顶堆<br>    - 从 k 位开始，继续遍历 map ，每一个数据出现频率都和小顶堆的堆顶元素出现频率进行比较，如果小于堆顶元素，则不做任何处理，继续遍历下一元素；如果大于堆顶元素，则将这个元素替换掉堆顶元素，然后再堆化成一个小顶堆。<br>    - 遍历完成后，堆中的数据就是前 k 大的数据<br><strong>代码实现</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> topKFrequent = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(), heap = [,]</span><br><span class="line">    nums.map(<span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(num)) map.set(num, map.get(num)+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span> map.set(num, <span class="number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果元素数量小于等于 k</span></span><br><span class="line">    <span class="keyword">if</span>(map.size &lt;= k) &#123;</span><br><span class="line">        <span class="keyword">return</span> [...map.keys()]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果元素数量大于 k，遍历map，构建小顶堆</span></span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">    map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &lt; k) &#123;</span><br><span class="line">            <span class="comment">// 取前k个建堆, 插入堆</span></span><br><span class="line">            heap.push(key)</span><br><span class="line">            <span class="comment">// 原地建立前 k 堆</span></span><br><span class="line">            <span class="keyword">if</span>(i === k<span class="number">-1</span>) buildHeap(heap, map, k)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(map.get(heap[<span class="number">1</span>]) &lt; value) &#123;</span><br><span class="line">            <span class="comment">// 替换并堆化</span></span><br><span class="line">            heap[<span class="number">1</span>] = key</span><br><span class="line">            <span class="comment">// 自上而下式堆化第一个元素</span></span><br><span class="line">            heapify(heap, map, k, <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        i++</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 删除heap中第一个元素</span></span><br><span class="line">    heap.shift()</span><br><span class="line">    <span class="keyword">return</span> heap</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原地建堆，从后往前，自上而下式建小顶堆</span></span><br><span class="line"><span class="keyword">let</span> buildHeap = <span class="function">(<span class="params">heap, map, k</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(k === <span class="number">1</span>) <span class="keyword">return</span></span><br><span class="line">    <span class="comment">// 从最后一个非叶子节点开始，自上而下式堆化</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="built_in">Math</span>.floor(k/<span class="number">2</span>); i&gt;=<span class="number">1</span> ; i--) &#123;</span><br><span class="line">        heapify(heap, map, k, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 堆化</span></span><br><span class="line"><span class="keyword">let</span> heapify = <span class="function">(<span class="params">heap, map, k, i</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 自上而下式堆化</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> minIndex = i</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">2</span>*i &lt;= k &amp;&amp; map.get(heap[<span class="number">2</span>*i]) &lt; map.get(heap[i])) &#123;</span><br><span class="line">            minIndex = <span class="number">2</span>*i</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">2</span>*i+<span class="number">1</span> &lt;= k &amp;&amp; map.get(heap[<span class="number">2</span>*i+<span class="number">1</span>]) &lt; map.get(heap[minIndex])) &#123;</span><br><span class="line">            minIndex = <span class="number">2</span>*i+<span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(minIndex !== i) &#123;</span><br><span class="line">            swap(heap, i, minIndex)</span><br><span class="line">            i = minIndex</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换</span></span><br><span class="line"><span class="keyword">let</span> swap = <span class="function">(<span class="params">arr, i , j</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = arr[i]</span><br><span class="line">    arr[i] = arr[j]</span><br><span class="line">    arr[j] = temp</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：遍历数组需要 O(n) 的时间复杂度，一次堆化需要 O(logk) 时间复杂度，所以利用堆求 Top k 问题的时间复杂度为 O(nlogk)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><p>这里取前k个高频元素，使用计数排序不再适合，在上题目中使用计数排序，将 i 元素出现的次数存储在 bucket[i] ，但这种存储不能保证 bucket 数组上值是有序的，例如 bucket=[0,3,1,2] ，即元素 0 未出现，元素 1 出现 3 次，元素 2 出现 1 次，元素 3 出现 2 次，所以计数排序不适用于取前k个高频元素，不过，不用怕，计数排序不行，还有桶排序。</p>
+<p>桶排序是计数排序的升级版。它也是利用函数的映射关系。</p>
+<p>桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排）。</p>
+<ul>
+<li>首先使用 map 来存储频率</li>
+<li>然后创建一个数组（有数量的桶），将频率作为数组下标，对于出现频率不同的数字集合，存入对应的数组下标（桶内）即可。</li>
+</ul>
+<p><strong>代码实现</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> topKFrequent = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(), arr = [...new <span class="built_in">Set</span>(nums)]</span><br><span class="line">    nums.map(<span class="function">(<span class="params">num</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(map.has(num)) map.set(num, map.get(num)+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span> map.set(num, <span class="number">1</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果元素数量小于等于 k</span></span><br><span class="line">    <span class="keyword">if</span>(map.size &lt;= k) &#123;</span><br><span class="line">        <span class="keyword">return</span> [...map.keys()]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> bucketSort(map, k)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 桶排序</span></span><br><span class="line"><span class="keyword">let</span> bucketSort = <span class="function">(<span class="params">map, k</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> arr = [], res = []</span><br><span class="line">    map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 利用映射关系（出现频率作为下标）将数据分配到各个桶中</span></span><br><span class="line">        <span class="keyword">if</span>(!arr[value]) &#123;</span><br><span class="line">            arr[value] = [key]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            arr[value].push(key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 倒序遍历获取出现频率最大的前k个数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = arr.length - <span class="number">1</span>;i &gt;= <span class="number">0</span> &amp;&amp; res.length &lt; k;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i]) &#123;</span><br><span class="line">            res.push(...arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度分析：</strong></p>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
 
       
     </div>
@@ -390,7 +418,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag"># 面试题</a>
+            <a href="/tags/Map/" rel="tag"># Map</a>
+          
+            <a href="/tags/%E5%B0%8F%E9%A1%B6%E5%A0%86/" rel="tag"># 小顶堆</a>
+          
+            <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/" rel="tag"># 桶排序</a>
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
           
         </div>
       
@@ -403,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/01/%E9%9D%A2%E7%BB%8F-yz/" rel="next" title="面经(yz)">
-                <i class="fa fa-chevron-left"></i> 面经(yz)
+              <a href="/2020/09/07/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" rel="next" title="防抖和节流">
+                <i class="fa fa-chevron-left"></i> 防抖和节流
               </a>
             
           </div>
@@ -412,10 +446,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/09/04/this%E7%9A%84%E8%80%83%E6%9F%A5/" rel="prev" title="this的考查">
-                this的考查 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -548,6 +587,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#map-数组"><span class="nav-number">1.</span> <span class="nav-text">map+数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-小顶堆"><span class="nav-number">2.</span> <span class="nav-text">map+小顶堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶排序"><span class="nav-number">3.</span> <span class="nav-text">桶排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
