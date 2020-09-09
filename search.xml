@@ -514,11 +514,17 @@
   <entry>
     <title>常见面试题</title>
     <url>/2020/09/06/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<p>常见面试编程题汇总</p>
+    <content><![CDATA[<p>常见面试题汇总</p>
 <a id="more"></a>
 <ol>
 <li>手写一个sleep函数（可从Promise，Generator，async/await等角度实现）<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sleep</span>(<span class="params">ms</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>&#123;</span><br><span class="line">        setTimeout(resolve, ms)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">~<span class="function">(<span class="params"><span class="keyword">async</span> (</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">111</span>)</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">2000</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">222</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></li>
 <li>已知如下数组，编写一个程序将数组扁平化去除其中重复部分数据，最终得到一个升序且不重复的数组(不使用es6的flat()方法)<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, [<span class="number">11</span>, <span class="number">12</span>, [<span class="number">12</span>, <span class="number">13</span>, [<span class="number">14</span>]]]], <span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> res = []</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">flat</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> arr[i] == <span class="string">'number'</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(res.indexOf(arr[i]) == <span class="number">-1</span>)&#123;</span><br><span class="line">                res.push(arr[i])</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flat(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> pivot = res[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">let</span> left = [],right = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;res.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(res[i]&gt;pivot)&#123;</span><br><span class="line">            right.push(res[i])</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res[i]&lt;pivot)&#123;</span><br><span class="line">            left.push(res[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(left.concat(pivot, right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">flat(arr)</span><br></pre></td></tr></table></figure></li>
+<li>在不改变当前代码的情况下，使这张图片的宽度为300px <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.png"</span> <span class="attr">style</span>=<span class="string">"width: 480px !important"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>css方法<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.png"</span> <span class="attr">style</span>=<span class="string">"width: 480px !important; max-width: 300px "</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.png"</span> <span class="attr">style</span>=<span class="string">"width: 480px !important; transform: scale(0.65, 1);"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.png"</span> <span class="attr">style</span>=<span class="string">"width: 480px !important; width: 300px !important"</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>js方法<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'img'</span>)[<span class="number">0</span>].setAttribute(<span class="string">'style'</span>, <span class="string">'width: 300px !important'</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -769,6 +775,74 @@
         <tag>小顶堆</tag>
         <tag>桶排序</tag>
         <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetcode-组合总和</title>
+    <url>/2020/09/09/leetcode-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</url>
+    <content><![CDATA[<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>candidates 中的数字可以无限制重复被选取。</p>
+<a id="more"></a>
+<blockquote>
+<p>原题描述访问：<a href="https://leetcode-cn.com/problems/combinations/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combinations/</a><br>题解转自：<a href="https://leetcode-cn.com/problems/combination-sum/solution/shou-hua-tu-jie-zu-he-zong-he-combination-sum-by-x/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combination-sum/solution/shou-hua-tu-jie-zu-he-zong-he-combination-sum-by-x/</a></p>
+</blockquote>
+<p><strong>题意</strong><br>给你一个数组，里面都是不带重复的正数，还给你一个 target，求出所有和为 target 的组合。<br>元素可以重复使用，但组合不能重复，比如 [2, 2, 3] 与 [2, 3, 2] 是重复的。<br><strong>参考图解</strong><br><img src="https://cdn.jsdelivr.net/gh/yc2hang/cdn-assets/photos/combinationsum.png" alt="avatar"><br><strong>代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> combinationSum = <span class="function">(<span class="params">candidates, target</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = [];</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> dfs = <span class="function">(<span class="params">start, temp</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (sum &gt;= target) &#123;</span><br><span class="line">      <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">        res.push(temp.slice());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>;  <span class="comment">// 结束当前递归</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; candidates.length; i++) &#123; <span class="comment">// 枚举出选择，从start开始</span></span><br><span class="line">      sum += candidates[i];     <span class="comment">// 累加给sum</span></span><br><span class="line">      temp.push(candidates[i]); <span class="comment">// 加入“部分解”</span></span><br><span class="line">      dfs(i, temp);             <span class="comment">// 往下递归，继续选择，注意是i，不是i+1</span></span><br><span class="line">      sum -= candidates[i];     <span class="comment">// 撤销选择，sum变回来</span></span><br><span class="line">      temp.pop();               <span class="comment">// 撤销选择</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  dfs(<span class="number">0</span>, []);</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong></p>
+<div class="note "><p>回溯：在包含问题的所有的解的空间树中，按DFS的方法，从根节点出发，搜索整棵解空间树。</p>
+<p>搜索至任何一个节点时，总是会先判断当前节点是否可以 lead us to a complete solution。如果不可以，则结束对「以当前节点为根节点的子树」的搜索，向父节点回溯，回到之前的状态，搜索下一个分支。</p>
+<p>否则，进入该子树，继续以DFS的方式搜索。</p>
+<p>空间树中的节点是动态的，当前有哪些节点可选择，是根据上一步的选择（上一步的状态）得出的，所以做回溯时，要把状态还原成进入当前节点之前的状态。</p>
+<p>我们在做题时，要确定出问题的解空间树，它是隐式的，不是显式的一棵树。不熟练的就画图看看。</p>
+<p>然后，明确每个节点的扩展搜索规则。</p>
+<p>然后进行DFS搜索，并注意剪枝，避免无效的搜索。</p></div>
+
+
+]]></content>
+      <categories>
+        <category>算法与数据结构</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+        <tag>leetcode</tag>
+        <tag>dfs</tag>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>display,visibility和opacity</title>
+    <url>/2020/09/09/display-visibility%E5%92%8Copacity/</url>
+    <content><![CDATA[<p>以下为三者设置样式的区别</p>
+<a id="more"></a>
+<p><strong>display: none</strong></p>
+<ol>
+<li>DOM结构：浏览器不会渲染display属性为none的元素，不占用空间</li>
+<li>事件监听：无法进行DOM事件监听</li>
+<li>性能：动态改变此属性会引起重排，性能较差</li>
+<li>继承：不会被子元素继承，毕竟子类也不会被渲染</li>
+<li>transition：transition不支持display</li>
+</ol>
+<p><strong>visibility: hidden</strong></p>
+<ol>
+<li>DOM结构：元素被隐藏，但是会被渲染，不会消失，占用空间</li>
+<li>事件监听：无法进行DOM事件监听</li>
+<li>性能：动态改变此属性会引起重绘，性能较高</li>
+<li>继承：会被子元素继承，自元素可以通过设置visibility: visible来取消隐藏</li>
+<li>transition：visibility会立即显示，隐藏时会延时</li>
+</ol>
+<p><strong>opacity: 0</strong></p>
+<ol>
+<li>DOM结构：透明度为100%，元素隐藏，占用空间</li>
+<li>事件监听：可以进行DOM事件监听</li>
+<li>性能：提升为合成层，不会触发重绘，性能较高</li>
+<li>继承：会被子元素继承且子元素不能通过opacity: 1来取消隐藏</li>
+<li>transition：opacity可以延时显示和隐藏</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>面试题</tag>
       </tags>
   </entry>
 </search>
